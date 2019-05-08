@@ -1,0 +1,142 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Customers API",
+    "description" : "No description",
+    "contact" : { },
+    "version" : "1.0.0"
+  },
+  "servers" : [ {
+    "url" : "http://127.0.0.1:8090",
+    "description" : "Localhost testing (Talend Studio)"
+  }, {
+    "url" : "https://2gefobu.us.api-mocks.com",
+    "description" : "This is your API mock  endpoint. When called, it will simulate the behavior of your API."
+  } ],
+  "paths" : {
+    "/customers" : {
+      "summary" : "Customer RESTFul interface",
+      "description" : "This path will provide customer API's that do not require any parameters",
+      "get" : {
+        "summary" : "get all customers",
+        "description" : "This operation will retrieve all customer records",
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Customer"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post" : {
+        "summary" : "add customer",
+        "description" : "Adds a customer",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Customer"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      }
+    },
+    "/customers/{id}" : {
+      "summary" : "Customer API with ID Parameter",
+      "description" : "For customer API's that require the ID value passed as a parameter",
+      "get" : {
+        "summary" : "get customer by id",
+        "description" : "Gets customer by ID",
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "update customer by id",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Customer"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Status 200",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete" : {
+        "summary" : "delete customer by id",
+        "responses" : {
+          "200" : {
+            "description" : "Status 200"
+          }
+        }
+      },
+      "parameters" : [ {
+        "name" : "id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      } ]
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Customer" : {
+        "type" : "object",
+        "description" : "This is a simple customer definition",
+        "properties" : {
+          "customer" : {
+            "type" : "object",
+            "required" : [ "id" ],
+            "properties" : {
+              "id" : {
+                "type" : "number"
+              },
+              "name" : {
+                "type" : "string"
+              }
+            }
+          }
+        },
+        "example" : "{\n \"customer\": {\n \"id\": 4,\n \"name\": \"Sara Cynthia Sylvia Stout\"\n }\n} "
+      }
+    }
+  }
+}
